@@ -3,9 +3,9 @@
 -- For source, contact https://soloworks.co.uk
 
 PluginInfo = {
-    Name = "Q-Sys Community~Template", -- The tilde here indicates folder structure in the Shematic Elements pane
-    Version = "0.0.0-localdev",
-    Id = "q-sys.community.template.0.0.0-localdev", -- show this is just a unique id. Show some commented out 'fun' unique ids
+    Name = "Q-Sys Community~Template (0.0.0-master)", -- The tilde here indicates folder structure in the Shematic Elements pane
+    Version = "0.0.0-master",
+    Id = "q-sys.community.template.0.0.0-master", -- show this is just a unique id. Show some commented out 'fun' unique ids
     Description = "Template for development of Q-Sys Plugins, and automation testing.",
     ShowDebug = true,
     Author = "Solo Works London"

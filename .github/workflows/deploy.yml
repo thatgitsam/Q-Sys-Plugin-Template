@@ -24,11 +24,11 @@ jobs:
         $TAG = $Env:GITHUB_REF.Replace("refs/tags/","")
         # Will get exactly the first instance of a .qplug file
         $QPLUG = (Get-ChildItem -Path "content" -Include *.qplug -Force -Recurse -File | Select-Object -First 1).Name
-        ((Get-Content -path content\$QPLUG -Raw) -replace '0.0.0-localdev',$TAG) | Set-Content content\$QPLUG
+        ((Get-Content -path content\$QPLUG -Raw) -replace '0.0.0-master',$TAG) | Set-Content content\$QPLUG
         Get-Content -path content\$QPLUG -Raw
   
     - name: Pack with nuget.exe
       run: |
-        nuget pack
+        nuget pack -Version $Env:GITHUB_REF.Replace("refs/tags/","")
         dir
         
