@@ -14,8 +14,19 @@ jobs:
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1
       
-    - name: Run a multi-line script
+    - name: Get Tag (Should be present)
       shell: pwsh
       run: |
-        Get-Content -path content\q-sys-plugin-template.qplug
+        echo Something Out Here
+        echo ${GITHUB_REF#refs/heads/}
+      
+    - name: Update version in .qplug file
+      shell: pwsh
+      run: |
+        (Get-Content -path content\q-sys-plugin-template.qplug -Raw) -replace '0.0.0-localdev','1.0.0'
+        
+    - name: Output .qplug file
+      shell: pwsh
+      run: |
+        Get-Content -path content\q-sys-plugin-template.qplug -Raw
         
