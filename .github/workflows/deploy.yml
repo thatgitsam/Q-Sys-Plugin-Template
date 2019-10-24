@@ -17,8 +17,7 @@ jobs:
     - name: Get Tag (Should be present)
       shell: pwsh
       run: |
-        echo Something Out Here
-        echo ${GITHUB_REF#refs/heads/}
+        "Get-ChildItem Env:"
       
     - name: Update version in .qplug file
       shell: pwsh
