@@ -25,10 +25,16 @@ jobs:
         # Will get exactly the first instance of a .qplug file
         $QPLUG = (Get-ChildItem -Path "content" -Include *.qplug -Force -Recurse -File | Select-Object -First 1).Name
         ((Get-Content -path content\$QPLUG -Raw) -replace '0.0.0-master',$TAG) | Set-Content content\$QPLUG
-        Get-Content -path content\$QPLUG -Raw
+        
   
     - name: Pack with nuget.exe
       run: |
         nuget pack -Version $Env:GITHUB_REF.Replace("refs/tags/","")
-        dir
+
+    - name: Push with nuget.exe
+      run: |
+        $NUPKG = (Get-ChildItem -Path "." -Include *.nupkg -Force -Recurse -File | Select-Object -First 1).Name
+        nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/thatgitsam/index.json" -UserName thatgitsam -Password GH_TOKEN
+        nuget push $NUPKG -Souce "GitHub"
+
         
