@@ -8,7 +8,7 @@
     <authors>Sam Shelton</authors>
     <owners>Solo Works London</owners>
     <license type="expression">GPL-3.0-or-later</license>
-    <projectUrl>https://github.com/q-sys-community/q-sys-plugin-template</projectUrl>
+    <projectUrl>https://github.com/thatgitsam/Q-Sys-Plugin-Template</projectUrl>
     <iconUrl>http://content/images/brand-logo-128px.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Q-Sys Designer Template</description>
