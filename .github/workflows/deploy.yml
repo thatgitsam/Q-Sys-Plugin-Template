@@ -1,6 +1,11 @@
 name: Deploy Package
 
-on: [push]
+on:
+  push:
+    branches:
+      -master
+    tags:
+      - '*'
 
 jobs:
   build:
@@ -11,28 +16,19 @@ jobs:
     - name: Pull Source Files
       uses: actions/checkout@v1
 
-    - name: Set env
-      run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF})
-
-    - name: Test
-      run: echo $RELEASE_VERSION
-
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1
-      
-    - name: Get Tag (Should be present)
-      shell: pwsh
-      run: |
-        echo env...
-        $Env:RELEASE_VERSION
-      
+
     - name: Update version in .qplug file
-      shell: pwsh
       run: |
-        (Get-Content -path content\q-sys-plugin-template.qplug -Raw) -replace '0.0.0-localdev','1.0.0'
-        
-    - name: Output .qplug file
-      shell: pwsh
+        $TAG = $Env:GITHUB_REF.Replace("refs/tags/","")
+        # Will get exactly the first instance of a .qplug file
+        $QPLUG = (Get-ChildItem -Path "content" -Include *.qplug -Force -Recurse -File | Select-Object -First 1).Name
+        ((Get-Content -path content\$QPLUG -Raw) -replace '0.0.0-localdev',$TAG) | Set-Content content\$QPLUG
+        Get-Content -path content\$QPLUG -Raw
+  
+    - name: Pack with nuget.exe
       run: |
-        Get-Content -path content\q-sys-plugin-template.qplug -Raw
+        nuget pack
+        dir
         
