@@ -11,13 +11,20 @@ jobs:
     - name: Pull Source Files
       uses: actions/checkout@v1
 
+    - name: Set env
+      run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF:10})
+
+    - name: Test
+      run: echo $RELEASE_VERSION
+
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1
       
     - name: Get Tag (Should be present)
       shell: pwsh
       run: |
-        echo $GITHUB_REF
+        echo env...
+        $Env:RELEASE_VERSION
       
     - name: Update version in .qplug file
       shell: pwsh
