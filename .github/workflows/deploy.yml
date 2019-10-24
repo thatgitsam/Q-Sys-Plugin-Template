@@ -34,7 +34,7 @@ jobs:
     - name: Push with nuget.exe
       run: |
         $NUPKG = (Get-ChildItem -Path "." -Include *.nupkg -Force -Recurse -File | Select-Object -First 1).Name
-        nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/thatgitsam/index.json" -UserName thatgitsam -Password GH_TOKEN
+        nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/thatgitsam/index.json" -UserName thatgitsam -Password $Env:GITHUB_TOKEN
         nuget push $NUPKG -Source "GitHub"
 
         
