@@ -36,7 +36,7 @@ jobs:
         GITHUB_PACKAGE_TOKEN: ${{ secrets.GITHUB_PACKAGE_TOKEN }}
       run: |
         $NUPKG = (Get-ChildItem -Path "." -Include *.nupkg -Force -Recurse -File | Select-Object -First 1).Name
-        nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/thatgitsam/index.json" -UserName thatgitsam -Password $Env:GITHUB_PACKAGE_TOKEN
-        nuget push $NUPKG -Source "GitHub" -ApiKey "000"
+        nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/thatgitsam/index.json" -UserName thatgitsam -Password 787021e056390e8f7857ca54f76b9814d36bada2
+        nuget push $NUPKG -Source "GitHub"
 
         
