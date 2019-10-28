@@ -33,7 +33,7 @@ jobs:
 
     - name: Push with nuget.exe
       env: # Or as an environment variable
-        GITHUB_PACKAGE_TOKEN: ${{ secrets.NUGET_APIKEY }}
+        NUGET_APIKEY: ${{ secrets.NUGET_APIKEY }}
       run: |
         $NUPKG = (Get-ChildItem -Path "." -Include *.nupkg -Force -Recurse -File | Select-Object -First 1).Name
         nuget push $NUPKG -Source "https://q-sys.soloworks.co.uk/q-sys-community-plugins/" -ApiKey $Env:NUGET_APIKEY
