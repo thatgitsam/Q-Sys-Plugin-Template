@@ -3,7 +3,7 @@
 <package >
   <metadata>
     <id>q-sys-plugin-template</id>
-    <version>0.0.0-localdev</version>
+    <version>0.0.0.0-localdev</version>
     <title>Q-Sys Plugin Template</title>
     <authors>Sam Shelton</authors>
     <owners>Solo Works London</owners>

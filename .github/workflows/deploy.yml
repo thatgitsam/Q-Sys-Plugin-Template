@@ -24,7 +24,7 @@ jobs:
         $TAG = $Env:GITHUB_REF.Replace("refs/tags/","")
         # Will get exactly the first instance of a .qplug file
         $QPLUG = (Get-ChildItem -Path "content" -Include *.qplug -Force -Recurse -File | Select-Object -First 1).Name
-        ((Get-Content -path content\$QPLUG -Raw) -replace '0.0.0-master',$TAG) | Set-Content content\$QPLUG
+        ((Get-Content -path content\$QPLUG -Raw) -replace '0.0.0.0-master',$TAG) | Set-Content content\$QPLUG
         
   
     - name: Pack with nuget.exe
@@ -33,10 +33,9 @@ jobs:
 
     - name: Push with nuget.exe
       env: # Or as an environment variable
-        GITHUB_PACKAGE_TOKEN: ${{ secrets.GITHUB_PACKAGE_TOKEN }}
+        GITHUB_PACKAGE_TOKEN: ${{ secrets.NUGET_APIKEY }}
       run: |
         $NUPKG = (Get-ChildItem -Path "." -Include *.nupkg -Force -Recurse -File | Select-Object -First 1).Name
-        nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/thatgitsam/index.json" -UserName thatgitsam -Password $Env:GITHUB_PACKAGE_TOKEN
-        nuget push $NUPKG -Source "GitHub"
+        nuget push $NUPKG -Source "https://q-sys.soloworks.co.uk/q-sys-community-plugins/" -ApiKey $Env:NUGET_APIKEY
 
         
